@@ -2,13 +2,23 @@ import { app, BrowserWindow } from 'electron';
 import * as path from 'path';
 import installExtension, { REACT_DEVELOPER_TOOLS } from "electron-devtools-installer";
 
+require('@electron/remote/main').initialize()
+
+import electronDl = require('electron-dl');
+// const electronDl = require('electron-dl');
+
+electronDl()
+
+
+
 function createWindow() {
   const win = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
-      // contextIsolation: false,
-      preload: path.join(__dirname, 'preload.js')
+      contextIsolation: false,
+      nodeIntegration: true,
+      preload: path.join(__dirname, 'preload.ts')
     }
   })
 
